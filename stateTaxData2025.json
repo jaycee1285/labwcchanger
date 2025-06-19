@@ -1,0 +1,1243 @@
+{
+  "metadata": {
+    "source": "Tax Foundation",
+    "year": 2025,
+    "lastUpdated": "2025-01-01",
+    "notes": "Comprehensive state income tax data including brackets, deductions, exemptions, and credits"
+  },
+  "federalData": {
+    "standardDeductions": {
+      "single": 15000,
+      "married": 30000,
+      "head": 22500
+    },
+    "brackets": {
+      "single": [
+        { "min": 0, "max": 11925, "rate": 0.10 },
+        { "min": 11925, "max": 48475, "rate": 0.12 },
+        { "min": 48475, "max": 103350, "rate": 0.22 },
+        { "min": 103350, "max": 197300, "rate": 0.24 },
+        { "min": 197300, "max": 250525, "rate": 0.32 },
+        { "min": 250525, "max": 626350, "rate": 0.35 },
+        { "min": 626350, "max": null, "rate": 0.37 }
+      ],
+      "married": [
+        { "min": 0, "max": 23850, "rate": 0.10 },
+        { "min": 23850, "max": 96950, "rate": 0.12 },
+        { "min": 96950, "max": 206700, "rate": 0.22 },
+        { "min": 206700, "max": 394600, "rate": 0.24 },
+        { "min": 394600, "max": 501050, "rate": 0.32 },
+        { "min": 501050, "max": 751600, "rate": 0.35 },
+        { "min": 751600, "max": null, "rate": 0.37 }
+      ],
+      "head": [
+        { "min": 0, "max": 16550, "rate": 0.10 },
+        { "min": 16550, "max": 63100, "rate": 0.12 },
+        { "min": 63100, "max": 100500, "rate": 0.22 },
+        { "min": 100500, "max": 191950, "rate": 0.24 },
+        { "min": 191950, "max": 243700, "rate": 0.32 },
+        { "min": 243700, "max": 609350, "rate": 0.35 },
+        { "min": 609350, "max": null, "rate": 0.37 }
+      ]
+    }
+  },
+  "states": {
+    "AL": {
+      "name": "Alabama",
+      "hasIncomeTax": true,
+      "taxType": "progressive",
+      "brackets": {
+        "single": [
+          { "min": 0, "max": 500, "rate": 0.02 },
+          { "min": 500, "max": 3000, "rate": 0.04 },
+          { "min": 3000, "max": null, "rate": 0.05 }
+        ],
+        "married": [
+          { "min": 0, "max": 1000, "rate": 0.02 },
+          { "min": 1000, "max": 6000, "rate": 0.04 },
+          { "min": 6000, "max": null, "rate": 0.05 }
+        ]
+      },
+      "standardDeduction": { "single": 3000, "married": 8500 },
+      "personalExemption": { "single": 1500, "married": 3000, "dependent": 1000 },
+      "specialRules": {
+        "federalTaxDeductible": true,
+        "adjustedGrossIncomeBasedDeduction": true,
+        "dependentExemptionPhaseout": {
+          "thresholds": { "50000": 1000, "100000": 500, "above100000": 300 }
+        }
+      }
+    },
+    "AK": {
+      "name": "Alaska",
+      "hasIncomeTax": false,
+      "taxType": "none"
+    },
+    "AZ": {
+      "name": "Arizona",
+      "hasIncomeTax": true,
+      "taxType": "flat",
+      "rate": 0.025,
+      "standardDeduction": { "single": 15000, "married": 30000 },
+      "personalExemption": { "single": 0, "married": 0, "dependent": 0 },
+      "credits": {
+        "dependent": {
+          "under17": 100,
+          "over17": 25,
+          "phaseout": { "single": 200000, "married": 400000 }
+        },
+        "charitableDeduction": {
+          "adjustment": 0.33,
+          "description": "Standard deduction increased by 33% of charitable deductions if itemizing"
+        }
+      }
+    },
+    "AR": {
+      "name": "Arkansas",
+      "hasIncomeTax": true,
+      "taxType": "progressive",
+      "brackets": {
+        "single": [
+          { "min": 0, "max": 4500, "rate": 0.02 },
+          { "min": 4500, "max": null, "rate": 0.039 }
+        ],
+        "married": [
+          { "min": 0, "max": 4500, "rate": 0.02 },
+          { "min": 4500, "max": null, "rate": 0.039 }
+        ]
+      },
+      "standardDeduction": { "single": 2410, "married": 4820 },
+      "personalExemption": { "single": 0, "married": 0, "dependent": 0 },
+      "credits": {
+        "personal": { "single": 29, "married": 58, "dependent": 29 }
+      },
+      "specialRules": {
+        "alternativeTaxTable": {
+          "threshold": 89600,
+          "rates": [
+            { "min": 5300, "rate": 0.02 },
+            { "min": 10600, "rate": 0.03 },
+            { "min": 15100, "rate": 0.034 },
+            { "min": 25000, "max": 89600, "rate": 0.039 }
+          ]
+        },
+        "bracketAdjustment": {
+          "min": 89600,
+          "max": 92700,
+          "hasAdjustment": true
+        }
+      }
+    },
+    "CA": {
+      "name": "California",
+      "hasIncomeTax": true,
+      "taxType": "progressive",
+      "brackets": {
+        "single": [
+          { "min": 0, "max": 10756, "rate": 0.01 },
+          { "min": 10756, "max": 25499, "rate": 0.02 },
+          { "min": 25499, "max": 40245, "rate": 0.04 },
+          { "min": 40245, "max": 55866, "rate": 0.06 },
+          { "min": 55866, "max": 70606, "rate": 0.08 },
+          { "min": 70606, "max": 360659, "rate": 0.093 },
+          { "min": 360659, "max": 432787, "rate": 0.103 },
+          { "min": 432787, "max": 721314, "rate": 0.113 },
+          { "min": 721314, "max": 1000000, "rate": 0.123 },
+          { "min": 1000000, "max": null, "rate": 0.133 }
+        ],
+        "married": [
+          { "min": 0, "max": 21512, "rate": 0.01 },
+          { "min": 21512, "max": 50998, "rate": 0.02 },
+          { "min": 50998, "max": 80490, "rate": 0.04 },
+          { "min": 80490, "max": 111732, "rate": 0.06 },
+          { "min": 111732, "max": 141732, "rate": 0.08 },
+          { "min": 141732, "max": 721318, "rate": 0.093 },
+          { "min": 721318, "max": 865574, "rate": 0.103 },
+          { "min": 865574, "max": 1000000, "rate": 0.113 },
+          { "min": 1000000, "max": 1442628, "rate": 0.123 },
+          { "min": 1442628, "max": null, "rate": 0.133 }
+        ]
+      },
+      "standardDeduction": { "single": 5540, "married": 11080 },
+      "personalExemption": { "single": 0, "married": 0, "dependent": 0 },
+      "credits": {
+        "personal": { "single": 149, "married": 298, "dependent": 461 },
+        "exemptionPhaseout": {
+          "single": { "start": 237035, "reduction": 6, "per": 2500 },
+          "married": { "start": 474075, "reduction": 12, "per": 2500 }
+        }
+      },
+      "specialRules": {
+        "mentalHealthTax": { "rate": 0.01, "threshold": 1000000 },
+        "disabilityInsurancePayroll": { "rate": 0.011, "noWageCeiling": true },
+        "conformityDate": "2015-01-01",
+        "topRateAllIncome": 0.144
+      }
+    },
+    "CO": {
+      "name": "Colorado",
+      "hasIncomeTax": true,
+      "taxType": "flat",
+      "rate": 0.044,
+      "standardDeduction": { "single": 15000, "married": 30000 },
+      "personalExemption": { "single": 0, "married": 0, "dependent": 0 },
+      "specialRules": {
+        "tabor": {
+          "canReduceRates": true,
+          "2024Rate": 0.0425,
+          "revertedTo": 0.044
+        },
+        "includesFederalStandardDeduction": true
+      }
+    }
+  },
+  "capitalGains": {
+    "federalRates": {
+      "longTerm": {
+        "single": [
+          { "min": 0, "max": 48350, "rate": 0.00 },
+          { "min": 48350, "max": 533400, "rate": 0.15 },
+          { "min": 533400, "max": null, "rate": 0.20 }
+        ],
+        "married": [
+          { "min": 0, "max": 96700, "rate": 0.00 },
+          { "min": 96700, "max": 600050, "rate": 0.15 },
+          { "min": 600050, "max": null, "rate": 0.20 }
+        ]
+      },
+      "shortTerm": "ordinary_income_rates"
+    },
+    "stateCapitalGainsTreatment": {
+      "WA": {
+        "type": "separate_rate",
+        "rate": 0.07,
+        "threshold": 270000,
+        "applies": "capital_gains_only"
+      },
+      "default": "ordinary_income"
+    }
+  },
+  "specialProvisions": {
+    "marriagePenalty": {
+      "avoidsMarriagePenalty": [
+        "AZ", "CO", "CT", "GA", "ID", "IL", "IN", "IA", "KS", "KY", "LA", 
+        "ME", "MA", "MI", "MS", "MT", "NE", "NC", "ND", "PA", "SC", "UT", "DC"
+      ]
+    },
+    "inflationIndexing": {
+      "fullIndexing": [
+        "AZ", "AR", "CA", "CO", "CT", "DE", "HI", "ID", "IL", "IN", "IA", 
+        "KS", "KY", "ME", "MD", "MA", "MI", "MN", "MS", "MT", "NE", "NJ", 
+        "NM", "NY", "NC", "ND", "OH", "OR", "RI", "SC", "UT", "VT", "WI", "DC"
+      ],
+      "partialIndexing": ["OK", "VA", "WV"],
+      "noIndexing": ["AL", "GA", "HI", "LA", "MO", "PA"]
+    },
+    "federalConformity": {
+      "currentYear": [
+        "AZ", "CO", "CT", "DE", "GA", "HI", "ID", "IL", "IN", "IA", "KS", 
+        "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MT", "NE", "NJ", 
+        "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "UT", 
+        "VT", "VA", "WV", "WI", "DC"
+      ],
+      "outdatedConformity": {
+        "CA": "2015-01-01"
+      }
+    },
+    "alternativeMinimumTax": {
+      "hasAMT": ["CA", "IA", "ME", "MN", "VT"],
+      "details": {
+        "VT": {
+          "rate": 0.03,
+          "threshold": 150000,
+          "calculation": "greater of income tax or 3% of federal AGI"
+        }
+      }
+    }
+  },
+  "recentChanges2025": {
+    "rateReductions": {
+      "AR": { "from": 0.047, "to": 0.039, "effective": "2024-01-01", "retroactive": true },
+      "CO": { "temporary2024": 0.0425, "reverted2025": 0.044 },
+      "GA": { "from": 0.0549, "to": 0.0539, "effective": "2024-01-01" },
+      "HI": { "majorBracketRestructuring": true, "doubledStandardDeduction": true },
+      "ID": { "from": 0.058, "to": 0.05695, "effective": "2024-01-01", "retroactive": true },
+      "IN": { "from": 0.0305, "to": 0.03, "scheduledFuture": { "2026": 0.0295, "2027": 0.029 } },
+      "IA": { "flattenedTo": 0.038, "effective": "2025-01-01" },
+      "KS": { "majorRestructuring": true, "consolidatedBrackets": true },
+      "LA": { "majorReform": true, "flattenedTo": 0.03 },
+      "MS": { "from": 0.047, "to": 0.044, "scheduledFuture": { "2026": 0.04 } },
+      "MO": { "from": 0.048, "to": 0.047, "triggered": true },
+      "NE": { "from": 0.0584, "to": 0.052, "scheduledFuture": { "2027": 0.0399 } },
+      "NH": { "repealed": "interest_dividends_tax", "effective": "2025-01-01" },
+      "NM": { "restructuredBrackets": true, "middleIncomeRelief": true },
+      "NC": { "from": 0.045, "to": 0.0425, "scheduledFuture": { "2026": 0.0399 } },
+      "SC": { "triggeredReduction": 0.062, "target": 0.06 },
+      "UT": { "from": 0.0465, "to": 0.0455, "effective": "2024-01-01", "retroactive": true }
+    }
+  },
+  "implementationNotes": {
+    "dataQuality": "comprehensive",
+    "coverage": "all_50_states_plus_dc",
+    "specialCases": {
+      "WA": "Only taxes capital gains above $270,000",
+      "NH": "Repealed interest/dividends tax in 2025",
+      "CA": "Includes mental health tax and disability payroll tax",
+      "MA": "Has millionaire's tax at 9% above $1M",
+      "CT_NY": "Have tax benefit recapture provisions"
+    },
+    "updates": {
+      "lastUpdated": "2025-01-01",
+      "source": "Tax Foundation 2025 State Income Tax Report",
+      "inflationAdjustments": "included_where_available"
+    }
+  }
+}alStandardDeduction": true
+      }
+    },
+    "CT": {
+      "name": "Connecticut",
+      "hasIncomeTax": true,
+      "taxType": "progressive",
+      "brackets": {
+        "single": [
+          { "min": 0, "max": 10000, "rate": 0.02 },
+          { "min": 10000, "max": 50000, "rate": 0.045 },
+          { "min": 50000, "max": 100000, "rate": 0.055 },
+          { "min": 100000, "max": 200000, "rate": 0.06 },
+          { "min": 200000, "max": 250000, "rate": 0.065 },
+          { "min": 250000, "max": 500000, "rate": 0.069 },
+          { "min": 500000, "max": null, "rate": 0.0699 }
+        ],
+        "married": [
+          { "min": 0, "max": 20000, "rate": 0.02 },
+          { "min": 20000, "max": 100000, "rate": 0.045 },
+          { "min": 100000, "max": 200000, "rate": 0.055 },
+          { "min": 200000, "max": 400000, "rate": 0.06 },
+          { "min": 400000, "max": 500000, "rate": 0.065 },
+          { "min": 500000, "max": 1000000, "rate": 0.069 },
+          { "min": 1000000, "max": null, "rate": 0.0699 }
+        ]
+      },
+      "standardDeduction": { "single": 0, "married": 0 },
+      "personalExemption": { "single": 15000, "married": 24000, "dependent": 0 },
+      "specialRules": {
+        "taxBenefitRecapture": true,
+        "complexPhaseouts": {
+          "single": {
+            "phaseout1": { "threshold": 56500, "reduction": 1000, "per": 5000 },
+            "phaseout2": { "threshold": 105000, "payment": 25, "per": 5000, "max": 250 },
+            "phaseout3": { "threshold": 200000, "payment": 90, "per": 5000, "max": 3150 }
+          },
+          "married": {
+            "phaseout1": { "threshold": 100500, "reduction": 2000, "per": 5000 },
+            "phaseout2": { "threshold": 210000, "payment": 50, "per": 10000, "max": 500 },
+            "phaseout3": { "threshold": 400000, "payment": 180, "per": 10000, "max": 6300 }
+          }
+        },
+        "personalExemptionPhaseout": {
+          "single": { "threshold": 30000, "reduction": 1000, "per": 1000 },
+          "married": { "threshold": 48000, "reduction": 1000, "per": 1000 }
+        }
+      }
+    },
+    "DE": {
+      "name": "Delaware",
+      "hasIncomeTax": true,
+      "taxType": "progressive",
+      "brackets": {
+        "single": [
+          { "min": 2000, "max": 5000, "rate": 0.022 },
+          { "min": 5000, "max": 10000, "rate": 0.039 },
+          { "min": 10000, "max": 20000, "rate": 0.048 },
+          { "min": 20000, "max": 25000, "rate": 0.052 },
+          { "min": 25000, "max": 60000, "rate": 0.0555 },
+          { "min": 60000, "max": null, "rate": 0.066 }
+        ],
+        "married": [
+          { "min": 2000, "max": 5000, "rate": 0.022 },
+          { "min": 5000, "max": 10000, "rate": 0.039 },
+          { "min": 10000, "max": 20000, "rate": 0.048 },
+          { "min": 20000, "max": 25000, "rate": 0.052 },
+          { "min": 25000, "max": 60000, "rate": 0.0555 },
+          { "min": 60000, "max": null, "rate": 0.066 }
+        ]
+      },
+      "standardDeduction": { "single": 3250, "married": 6500 },
+      "personalExemption": { "single": 0, "married": 0, "dependent": 0 },
+      "credits": {
+        "personal": { "single": 110, "married": 220, "dependent": 110 }
+      },
+      "specialRules": {
+        "lumpSumDistributionTax": true
+      }
+    },
+    "FL": {
+      "name": "Florida",
+      "hasIncomeTax": false,
+      "taxType": "none"
+    },
+    "GA": {
+      "name": "Georgia",
+      "hasIncomeTax": true,
+      "taxType": "flat",
+      "rate": 0.0539,
+      "standardDeduction": { "single": 12000, "married": 24000 },
+      "personalExemption": { "single": 0, "married": 0, "dependent": 4000 },
+      "specialRules": {
+        "scheduledReductions": {
+          "2026": { "rate": 0.06, "note": "Rate will revert to 6% unless extended" }
+        }
+      }
+    },
+    "HI": {
+      "name": "Hawaii",
+      "hasIncomeTax": true,
+      "taxType": "progressive",
+      "brackets": {
+        "single": [
+          { "min": 0, "max": 9600, "rate": 0.014 },
+          { "min": 9600, "max": 14400, "rate": 0.032 },
+          { "min": 14400, "max": 19200, "rate": 0.055 },
+          { "min": 19200, "max": 24000, "rate": 0.064 },
+          { "min": 24000, "max": 36000, "rate": 0.068 },
+          { "min": 36000, "max": 48000, "rate": 0.072 },
+          { "min": 48000, "max": 125000, "rate": 0.076 },
+          { "min": 125000, "max": 175000, "rate": 0.079 },
+          { "min": 175000, "max": 225000, "rate": 0.0825 },
+          { "min": 225000, "max": 275000, "rate": 0.09 },
+          { "min": 275000, "max": 325000, "rate": 0.10 },
+          { "min": 325000, "max": null, "rate": 0.11 }
+        ],
+        "married": [
+          { "min": 0, "max": 19200, "rate": 0.014 },
+          { "min": 19200, "max": 28800, "rate": 0.032 },
+          { "min": 28800, "max": 38400, "rate": 0.055 },
+          { "min": 38400, "max": 48000, "rate": 0.064 },
+          { "min": 48000, "max": 72000, "rate": 0.068 },
+          { "min": 72000, "max": 96000, "rate": 0.072 },
+          { "min": 96000, "max": 250000, "rate": 0.076 },
+          { "min": 250000, "max": 350000, "rate": 0.079 },
+          { "min": 350000, "max": 450000, "rate": 0.0825 },
+          { "min": 450000, "max": 550000, "rate": 0.09 },
+          { "min": 550000, "max": 650000, "rate": 0.10 },
+          { "min": 650000, "max": null, "rate": 0.11 }
+        ]
+      },
+      "standardDeduction": { "single": 4400, "married": 8800 },
+      "personalExemption": { "single": 1144, "married": 2288, "dependent": 1144 },
+      "specialRules": {
+        "restructured2025": true,
+        "complexBracketStructure": true,
+        "alternativeGrossReceiptsTax": {
+          "rate": 0.005,
+          "conditions": ["multistate", "noRealEstate", "salesUnder100k"]
+        }
+      }
+    },
+    "ID": {
+      "name": "Idaho",
+      "hasIncomeTax": true,
+      "taxType": "flat",
+      "rate": 0.05695,
+      "standardDeduction": { "single": 15000, "married": 30000 },
+      "personalExemption": { "single": 0, "married": 0, "dependent": 0 },
+      "specialRules": {
+        "minIncome": { "single": 4673, "married": 9346 },
+        "federalConformity": true
+      }
+    },
+    "IL": {
+      "name": "Illinois",
+      "hasIncomeTax": true,
+      "taxType": "flat",
+      "rate": 0.0495,
+      "standardDeduction": { "single": 0, "married": 0 },
+      "personalExemption": { "single": 2850, "married": 5700, "dependent": 2850 },
+      "specialRules": {
+        "exemptionPhaseout": {
+          "single": 250000,
+          "married": 500000
+        }
+      }
+    },
+    "IN": {
+      "name": "Indiana",
+      "hasIncomeTax": true,
+      "taxType": "flat",
+      "rate": 0.03,
+      "standardDeduction": { "single": 0, "married": 0 },
+      "personalExemption": { "single": 1000, "married": 2000, "dependent": 1000 },
+      "specialRules": {
+        "scheduledReductions": {
+          "2026": 0.0295,
+          "2027": 0.029
+        },
+        "additionalDependentExemption": 1500,
+        "firstYearDependentExemption": 3000
+      }
+    },
+    "IA": {
+      "name": "Iowa",
+      "hasIncomeTax": true,
+      "taxType": "flat",
+      "rate": 0.038,
+      "standardDeduction": { "single": 0, "married": 0 },
+      "personalExemption": { "single": 0, "married": 0, "dependent": 0 },
+      "credits": {
+        "personal": { "single": 40, "married": 80, "dependent": 40 }
+      },
+      "specialRules": {
+        "recentlyFlattened": "2025",
+        "wasProgressive": true
+      }
+    },
+    "KS": {
+      "name": "Kansas",
+      "hasIncomeTax": true,
+      "taxType": "progressive",
+      "brackets": {
+        "single": [
+          { "min": 0, "max": 23000, "rate": 0.052 },
+          { "min": 23000, "max": null, "rate": 0.0558 }
+        ],
+        "married": [
+          { "min": 0, "max": 46000, "rate": 0.052 },
+          { "min": 46000, "max": null, "rate": 0.0558 }
+        ]
+      },
+      "standardDeduction": { "single": 3605, "married": 8240 },
+      "personalExemption": { "single": 9160, "married": 18320, "dependent": 2320 },
+      "specialRules": {
+        "majorRestructuring2024": true,
+        "consolidatedBrackets": true
+      }
+    },
+    "KY": {
+      "name": "Kentucky",
+      "hasIncomeTax": true,
+      "taxType": "flat",
+      "rate": 0.04,
+      "standardDeduction": { "single": 3270, "married": 6540 },
+      "personalExemption": { "single": 0, "married": 0, "dependent": 0 }
+    },
+    "LA": {
+      "name": "Louisiana",
+      "hasIncomeTax": true,
+      "taxType": "flat",
+      "rate": 0.03,
+      "standardDeduction": { "single": 12500, "married": 25000 },
+      "personalExemption": { "single": 0, "married": 0, "dependent": 0 },
+      "specialRules": {
+        "majorReform2025": true,
+        "previouslyProgressive": true,
+        "standardDeductionInflationAdjusted": "2026"
+      }
+    },
+    "ME": {
+      "name": "Maine",
+      "hasIncomeTax": true,
+      "taxType": "progressive",
+      "brackets": {
+        "single": [
+          { "min": 0, "max": 26800, "rate": 0.058 },
+          { "min": 26800, "max": 63450, "rate": 0.0675 },
+          { "min": 63450, "max": null, "rate": 0.0715 }
+        ],
+        "married": [
+          { "min": 0, "max": 53600, "rate": 0.058 },
+          { "min": 53600, "max": 126900, "rate": 0.0675 },
+          { "min": 126900, "max": null, "rate": 0.0715 }
+        ]
+      },
+      "standardDeduction": { "single": 15000, "married": 30000 },
+      "personalExemption": { "single": 5150, "married": 10300, "dependent": 0 },
+      "credits": {
+        "dependent": 300
+      },
+      "specialRules": {
+        "personalExemptionPhaseout": {
+          "single": 323900,
+          "married": 388650
+        },
+        "standardDeductionPhaseout": {
+          "single": 100000,
+          "married": 200050
+        },
+        "dependentCreditPhaseout": {
+          "headOfHousehold": 200000,
+          "married": 400000
+        }
+      }
+    },
+    "MD": {
+      "name": "Maryland",
+      "hasIncomeTax": true,
+      "taxType": "progressive",
+      "brackets": {
+        "single": [
+          { "min": 0, "max": 1000, "rate": 0.02 },
+          { "min": 1000, "max": 2000, "rate": 0.03 },
+          { "min": 2000, "max": 3000, "rate": 0.04 },
+          { "min": 3000, "max": 100000, "rate": 0.0475 },
+          { "min": 100000, "max": 125000, "rate": 0.05 },
+          { "min": 125000, "max": 150000, "rate": 0.0525 },
+          { "min": 150000, "max": 250000, "rate": 0.055 },
+          { "min": 250000, "max": null, "rate": 0.0575 }
+        ],
+        "married": [
+          { "min": 0, "max": 1000, "rate": 0.02 },
+          { "min": 1000, "max": 2000, "rate": 0.03 },
+          { "min": 2000, "max": 3000, "rate": 0.04 },
+          { "min": 3000, "max": 150000, "rate": 0.0475 },
+          { "min": 150000, "max": 175000, "rate": 0.05 },
+          { "min": 175000, "max": 225000, "rate": 0.0525 },
+          { "min": 225000, "max": 300000, "rate": 0.055 },
+          { "min": 300000, "max": null, "rate": 0.0575 }
+        ]
+      },
+      "standardDeduction": { 
+        "single": 2700, 
+        "married": 5450,
+        "special": {
+          "calculation": "15% of income",
+          "minimum": { "single": 1800, "married": 3650 },
+          "maximum": { "single": 2700, "married": 5450 }
+        }
+      },
+      "personalExemption": { "single": 3200, "married": 6400, "dependent": 3200 },
+      "specialRules": {
+        "exemptionPhaseout": {
+          "single": { "start": 100000, "end": 150000 },
+          "married": { "start": 150000, "end": 200000 }
+        }
+      }
+    },
+    "MA": {
+      "name": "Massachusetts",
+      "hasIncomeTax": true,
+      "taxType": "progressive",
+      "brackets": {
+        "single": [
+          { "min": 0, "max": 1083150, "rate": 0.05 },
+          { "min": 1083150, "max": null, "rate": 0.09 }
+        ],
+        "married": [
+          { "min": 0, "max": 1083150, "rate": 0.05 },
+          { "min": 1083150, "max": null, "rate": 0.09 }
+        ]
+      },
+      "standardDeduction": { "single": 0, "married": 0 },
+      "personalExemption": { "single": 4400, "married": 8800, "dependent": 1000 },
+      "specialRules": {
+        "millionairesTax": { "rate": 0.04, "threshold": 1083150 },
+        "paidFamilyLeavePayroll": { "rate": 0.0046, "employerContribution": 0.0042 },
+        "excludesPayrollTaxes": true
+      }
+    },
+    "MI": {
+      "name": "Michigan",
+      "hasIncomeTax": true,
+      "taxType": "flat",
+      "rate": 0.0425,
+      "standardDeduction": { "single": 0, "married": 0 },
+      "personalExemption": { "single": 5800, "married": 11600, "dependent": 5800 }
+    },
+    "MN": {
+      "name": "Minnesota",
+      "hasIncomeTax": true,
+      "taxType": "progressive",
+      "brackets": {
+        "single": [
+          { "min": 0, "max": 32570, "rate": 0.0535 },
+          { "min": 32570, "max": 106990, "rate": 0.068 },
+          { "min": 106990, "max": 198630, "rate": 0.0785 },
+          { "min": 198630, "max": null, "rate": 0.0985 }
+        ],
+        "married": [
+          { "min": 0, "max": 47620, "rate": 0.0535 },
+          { "min": 47620, "max": 189180, "rate": 0.068 },
+          { "min": 189180, "max": 330410, "rate": 0.0785 },
+          { "min": 330410, "max": null, "rate": 0.0985 }
+        ]
+      },
+      "standardDeduction": { "single": 14950, "married": 29900 },
+      "personalExemption": { "single": 0, "married": 0, "dependent": 5200 },
+      "specialRules": {
+        "standardDeductionPhaseout": {
+          "singleThresholds": { "start": 119475, "end": 165150 },
+          "marriedThresholds": { "start": 238950, "end": 330300 },
+          "reductionRate": 0.03,
+          "secondThresholdRate": 0.10
+        },
+        "investmentIncomeSurtax": { "rate": 0.01, "threshold": 1000000 }
+      }
+    },
+    "MS": {
+      "name": "Mississippi",
+      "hasIncomeTax": true,
+      "taxType": "flat",
+      "rate": 0.044,
+      "standardDeduction": { "single": 2300, "married": 4600 },
+      "personalExemption": { "single": 6000, "married": 12000, "dependent": 1500 },
+      "specialRules": {
+        "minIncome": 10000,
+        "scheduledReductions": {
+          "2026": 0.04
+        }
+      }
+    },
+    "MO": {
+      "name": "Missouri",
+      "hasIncomeTax": true,
+      "taxType": "progressive",
+      "brackets": {
+        "single": [
+          { "min": 1313, "max": 2626, "rate": 0.02 },
+          { "min": 2626, "max": 3939, "rate": 0.025 },
+          { "min": 3939, "max": 5252, "rate": 0.03 },
+          { "min": 5252, "max": 6565, "rate": 0.035 },
+          { "min": 6565, "max": 7878, "rate": 0.04 },
+          { "min": 7878, "max": 9191, "rate": 0.045 },
+          { "min": 9191, "max": null, "rate": 0.047 }
+        ],
+        "married": [
+          { "min": 1313, "max": 2626, "rate": 0.02 },
+          { "min": 2626, "max": 3939, "rate": 0.025 },
+          { "min": 3939, "max": 5252, "rate": 0.03 },
+          { "min": 5252, "max": 6565, "rate": 0.035 },
+          { "min": 6565, "max": 7878, "rate": 0.04 },
+          { "min": 7878, "max": 9191, "rate": 0.045 },
+          { "min": 9191, "max": null, "rate": 0.047 }
+        ]
+      },
+      "standardDeduction": { "single": 15000, "married": 30000 },
+      "personalExemption": { "single": 0, "married": 0, "dependent": 0 },
+      "specialRules": {
+        "federalTaxDeductible": true,
+        "scheduledReductions": {
+          "triggeredReduction": 0.047
+        }
+      }
+    },
+    "MT": {
+      "name": "Montana",
+      "hasIncomeTax": true,
+      "taxType": "progressive",
+      "brackets": {
+        "single": [
+          { "min": 0, "max": 21100, "rate": 0.047 },
+          { "min": 21100, "max": null, "rate": 0.059 }
+        ],
+        "married": [
+          { "min": 0, "max": 42200, "rate": 0.047 },
+          { "min": 42200, "max": null, "rate": 0.059 }
+        ]
+      },
+      "standardDeduction": { "single": 15000, "married": 30000 },
+      "personalExemption": { "single": 0, "married": 0, "dependent": 0 },
+      "specialRules": {
+        "majorReform2024": true,
+        "usesFederalTaxableIncome": true,
+        "includesFederalStandardDeduction": true
+      }
+    },
+    "NE": {
+      "name": "Nebraska",
+      "hasIncomeTax": true,
+      "taxType": "progressive",
+      "brackets": {
+        "single": [
+          { "min": 0, "max": 4030, "rate": 0.0246 },
+          { "min": 4030, "max": 24120, "rate": 0.0351 },
+          { "min": 24120, "max": 38870, "rate": 0.0501 },
+          { "min": 38870, "max": null, "rate": 0.052 }
+        ],
+        "married": [
+          { "min": 0, "max": 8040, "rate": 0.0246 },
+          { "min": 8040, "max": 48250, "rate": 0.0351 },
+          { "min": 48250, "max": 77730, "rate": 0.0501 },
+          { "min": 77730, "max": null, "rate": 0.052 }
+        ]
+      },
+      "standardDeduction": { "single": 8600, "married": 17200 },
+      "personalExemption": { "single": 0, "married": 0, "dependent": 0 },
+      "credits": {
+        "personal": { "single": 171, "married": 342, "dependent": 171 }
+      },
+      "specialRules": {
+        "scheduledReductions": {
+          "2027": 0.0399
+        },
+        "relocationCredit": {
+          "rate": 0.50,
+          "maxPerEmployee": 5000,
+          "salaryRange": { "min": 70000, "max": 250000 }
+        },
+        "newResidentExemption": {
+          "duration": "1 year",
+          "applies": "Nebraska-sourced wages"
+        }
+      }
+    },
+    "NV": {
+      "name": "Nevada",
+      "hasIncomeTax": false,
+      "taxType": "none"
+    },
+    "NH": {
+      "name": "New Hampshire",
+      "hasIncomeTax": false,
+      "taxType": "none",
+      "specialRules": {
+        "interestDividendsTaxRepealed": "2025-01-01",
+        "previousRate": 0.03
+      }
+    },
+    "NJ": {
+      "name": "New Jersey",
+      "hasIncomeTax": true,
+      "taxType": "progressive",
+      "brackets": {
+        "single": [
+          { "min": 0, "max": 20000, "rate": 0.014 },
+          { "min": 20000, "max": 35000, "rate": 0.0175 },
+          { "min": 35000, "max": 40000, "rate": 0.035 },
+          { "min": 40000, "max": 75000, "rate": 0.05525 },
+          { "min": 75000, "max": 500000, "rate": 0.06370 },
+          { "min": 500000, "max": 1000000, "rate": 0.08970 },
+          { "min": 1000000, "max": null, "rate": 0.10750 }
+        ],
+        "married": [
+          { "min": 0, "max": 20000, "rate": 0.014 },
+          { "min": 20000, "max": 50000, "rate": 0.0175 },
+          { "min": 50000, "max": 70000, "rate": 0.0245 },
+          { "min": 70000, "max": 80000, "rate": 0.035 },
+          { "min": 80000, "max": 150000, "rate": 0.05525 },
+          { "min": 150000, "max": 500000, "rate": 0.06370 },
+          { "min": 500000, "max": 1000000, "rate": 0.08970 },
+          { "min": 1000000, "max": null, "rate": 0.10750 }
+        ]
+      },
+      "standardDeduction": { "single": 0, "married": 0 },
+      "personalExemption": { "single": 1000, "married": 2000, "dependent": 1500 }
+    },
+    "NM": {
+      "name": "New Mexico",
+      "hasIncomeTax": true,
+      "taxType": "progressive",
+      "brackets": {
+        "single": [
+          { "min": 0, "max": 5500, "rate": 0.015 },
+          { "min": 5500, "max": 16500, "rate": 0.032 },
+          { "min": 16500, "max": 33500, "rate": 0.043 },
+          { "min": 33500, "max": 66500, "rate": 0.047 },
+          { "min": 66500, "max": 210000, "rate": 0.049 },
+          { "min": 210000, "max": null, "rate": 0.059 }
+        ],
+        "married": [
+          { "min": 0, "max": 8000, "rate": 0.015 },
+          { "min": 8000, "max": 25000, "rate": 0.032 },
+          { "min": 25000, "max": 50000, "rate": 0.043 },
+          { "min": 50000, "max": 100000, "rate": 0.047 },
+          { "min": 100000, "max": 315000, "rate": 0.049 },
+          { "min": 315000, "max": null, "rate": 0.059 }
+        ]
+      },
+      "standardDeduction": { "single": 15000, "married": 30000 },
+      "personalExemption": { "single": 0, "married": 0, "dependent": 4000 },
+      "specialRules": {
+        "includesFederalStandardDeduction": true,
+        "dependentDeductionInLieuOfExemption": true
+      }
+    },
+    "NY": {
+      "name": "New York",
+      "hasIncomeTax": true,
+      "taxType": "progressive",
+      "brackets": {
+        "single": [
+          { "min": 0, "max": 8500, "rate": 0.04 },
+          { "min": 8500, "max": 11700, "rate": 0.045 },
+          { "min": 11700, "max": 13900, "rate": 0.0525 },
+          { "min": 13900, "max": 80650, "rate": 0.055 },
+          { "min": 80650, "max": 215400, "rate": 0.06 },
+          { "min": 215400, "max": 1077550, "rate": 0.0685 },
+          { "min": 1077550, "max": 5000000, "rate": 0.0965 },
+          { "min": 5000000, "max": 25000000, "rate": 0.103 },
+          { "min": 25000000, "max": null, "rate": 0.109 }
+        ],
+        "married": [
+          { "min": 0, "max": 17150, "rate": 0.04 },
+          { "min": 17150, "max": 23600, "rate": 0.045 },
+          { "min": 23600, "max": 27900, "rate": 0.0525 },
+          { "min": 27900, "max": 161550, "rate": 0.055 },
+          { "min": 161550, "max": 323200, "rate": 0.06 },
+          { "min": 323200, "max": 2155350, "rate": 0.0685 },
+          { "min": 2155350, "max": 5000000, "rate": 0.0965 },
+          { "min": 5000000, "max": 25000000, "rate": 0.103 },
+          { "min": 25000000, "max": null, "rate": 0.109 }
+        ]
+      },
+      "standardDeduction": { "single": 8000, "married": 16050 },
+      "personalExemption": { "single": 0, "married": 0, "dependent": 1000 },
+      "specialRules": {
+        "taxBenefitRecapture": true,
+        "millionaireTax": true
+      }
+    },
+    "NC": {
+      "name": "North Carolina",
+      "hasIncomeTax": true,
+      "taxType": "flat",
+      "rate": 0.0425,
+      "standardDeduction": { "single": 12750, "married": 25500 },
+      "personalExemption": { "single": 0, "married": 0, "dependent": 0 },
+      "specialRules": {
+        "scheduledReductions": {
+          "2026": 0.0399
+        }
+      }
+    },
+    "ND": {
+      "name": "North Dakota",
+      "hasIncomeTax": true,
+      "taxType": "progressive",
+      "brackets": {
+        "single": [
+          { "min": 48475, "max": 244825, "rate": 0.0195 },
+          { "min": 244825, "max": null, "rate": 0.025 }
+        ],
+        "married": [
+          { "min": 80975, "max": 298075, "rate": 0.0195 },
+          { "min": 298075, "max": null, "rate": 0.025 }
+        ]
+      },
+      "standardDeduction": { "single": 15000, "married": 30000 },
+      "personalExemption": { "single": 0, "married": 0, "dependent": 0 },
+      "specialRules": {
+        "includesFederalStandardDeduction": true
+      }
+    },
+    "OH": {
+      "name": "Ohio",
+      "hasIncomeTax": true,
+      "taxType": "progressive",
+      "brackets": {
+        "single": [
+          { "min": 26050, "max": 100000, "rate": 0.0275 },
+          { "min": 100000, "max": null, "rate": 0.035 }
+        ],
+        "married": [
+          { "min": 26050, "max": 100000, "rate": 0.0275 },
+          { "min": 100000, "max": null, "rate": 0.035 }
+        ]
+      },
+      "standardDeduction": { "single": 0, "married": 0 },
+      "personalExemption": { 
+        "tiered": {
+          "under40k": 2400,
+          "40k_to_80k": 2150,
+          "over80k": 1900
+        }
+      },
+      "specialRules": {
+        "commercialActivityTax": true,
+        "exemptionTieredByIncome": true
+      }
+    },
+    "OK": {
+      "name": "Oklahoma",
+      "hasIncomeTax": true,
+      "taxType": "progressive",
+      "brackets": {
+        "single": [
+          { "min": 0, "max": 1000, "rate": 0.0025 },
+          { "min": 1000, "max": 2500, "rate": 0.0075 },
+          { "min": 2500, "max": 3750, "rate": 0.0175 },
+          { "min": 3750, "max": 4900, "rate": 0.0275 },
+          { "min": 4900, "max": 7200, "rate": 0.0375 },
+          { "min": 7200, "max": null, "rate": 0.0475 }
+        ],
+        "married": [
+          { "min": 0, "max": 2000, "rate": 0.0025 },
+          { "min": 2000, "max": 5000, "rate": 0.0075 },
+          { "min": 5000, "max": 7500, "rate": 0.0175 },
+          { "min": 7500, "max": 9800, "rate": 0.0275 },
+          { "min": 9800, "max": 14400, "rate": 0.0375 },
+          { "min": 14400, "max": null, "rate": 0.0475 }
+        ]
+      },
+      "standardDeduction": { "single": 6350, "married": 12700 },
+      "personalExemption": { "single": 1000, "married": 2000, "dependent": 1000 }
+    },
+    "OR": {
+      "name": "Oregon",
+      "hasIncomeTax": true,
+      "taxType": "progressive",
+      "brackets": {
+        "single": [
+          { "min": 0, "max": 4400, "rate": 0.0475 },
+          { "min": 4400, "max": 11050, "rate": 0.0675 },
+          { "min": 11050, "max": 125000, "rate": 0.0875 },
+          { "min": 125000, "max": null, "rate": 0.099 }
+        ],
+        "married": [
+          { "min": 0, "max": 8800, "rate": 0.0475 },
+          { "min": 8800, "max": 22100, "rate": 0.0675 },
+          { "min": 22100, "max": 250000, "rate": 0.0875 },
+          { "min": 250000, "max": null, "rate": 0.099 }
+        ]
+      },
+      "standardDeduction": { "single": 2800, "married": 5600 },
+      "personalExemption": { "single": 0, "married": 0, "dependent": 0 },
+      "credits": {
+        "personal": { "single": 250, "married": 500, "dependent": 250 },
+        "exemptionCreditPhaseout": {
+          "single": 100000,
+          "married": 200000
+        }
+      },
+      "specialRules": {
+        "federalTaxDeductible": true,
+        "topBracketNotFullyIndexed": true
+      }
+    },
+    "PA": {
+      "name": "Pennsylvania",
+      "hasIncomeTax": true,
+      "taxType": "flat",
+      "rate": 0.0307,
+      "standardDeduction": { "single": 0, "married": 0 },
+      "personalExemption": { "single": 0, "married": 0, "dependent": 0 }
+    },
+    "RI": {
+      "name": "Rhode Island",
+      "hasIncomeTax": true,
+      "taxType": "progressive",
+      "brackets": {
+        "single": [
+          { "min": 0, "max": 79900, "rate": 0.0375 },
+          { "min": 79900, "max": 181650, "rate": 0.0475 },
+          { "min": 181650, "max": null, "rate": 0.0599 }
+        ],
+        "married": [
+          { "min": 0, "max": 79900, "rate": 0.0375 },
+          { "min": 79900, "max": 181650, "rate": 0.0475 },
+          { "min": 181650, "max": null, "rate": 0.0599 }
+        ]
+      },
+      "standardDeduction": { "single": 10900, "married": 21800 },
+      "personalExemption": { "single": 5100, "married": 10200, "dependent": 5100 },
+      "specialRules": {
+        "phaseoutRange": {
+          "start": 254250,
+          "end": 283250
+        }
+      }
+    },
+    "SC": {
+      "name": "South Carolina",
+      "hasIncomeTax": true,
+      "taxType": "progressive",
+      "brackets": {
+        "single": [
+          { "min": 0, "max": 3560, "rate": 0.00 },
+          { "min": 3560, "max": 17830, "rate": 0.03 },
+          { "min": 17830, "max": null, "rate": 0.062 }
+        ],
+        "married": [
+          { "min": 0, "max": 3560, "rate": 0.00 },
+          { "min": 3560, "max": 17830, "rate": 0.03 },
+          { "min": 17830, "max": null, "rate": 0.062 }
+        ]
+      },
+      "standardDeduction": { "single": 15000, "married": 30000 },
+      "personalExemption": { "single": 0, "married": 0, "dependent": 4790 },
+      "specialRules": {
+        "triggeredReductions": {
+          "target": 0.06,
+          "conditions": "revenue triggers"
+        },
+        "includesFederalStandardDeduction": true
+      }
+    },
+    "SD": {
+      "name": "South Dakota",
+      "hasIncomeTax": false,
+      "taxType": "none"
+    },
+    "TN": {
+      "name": "Tennessee",
+      "hasIncomeTax": false,
+      "taxType": "none"
+    },
+    "TX": {
+      "name": "Texas",
+      "hasIncomeTax": false,
+      "taxType": "none"
+    },
+    "UT": {
+      "name": "Utah",
+      "hasIncomeTax": true,
+      "taxType": "flat",
+      "rate": 0.0455,
+      "standardDeduction": { "single": 0, "married": 0 },
+      "personalExemption": { "single": 0, "married": 0, "dependent": 2046 },
+      "credits": {
+        "standardDeduction": { "single": 900, "married": 1800 },
+        "phaseout": {
+          "start": { "single": 17652, "married": 35304 },
+          "rate": 0.013
+        }
+      },
+      "specialRules": {
+        "standardDeductionAsCredit": true,
+        "creditBasedSystem": true
+      }
+    },
+    "VT": {
+      "name": "Vermont",
+      "hasIncomeTax": true,
+      "taxType": "progressive",
+      "brackets": {
+        "single": [
+          { "min": 0, "max": 47900, "rate": 0.0335 },
+          { "min": 47900, "max": 116000, "rate": 0.066 },
+          { "min": 116000, "max": 242000, "rate": 0.076 },
+          { "min": 242000, "max": null, "rate": 0.0875 }
+        ],
+        "married": [
+          { "min": 0, "max": 79950, "rate": 0.0335 },
+          { "min": 79950, "max": 193300, "rate": 0.066 },
+          { "min": 193300, "max": 294600, "rate": 0.076 },
+          { "min": 294600, "max": null, "rate": 0.0875 }
+        ]
+      },
+      "standardDeduction": { "single": 7400, "married": 14850 },
+      "personalExemption": { "single": 5100, "married": 10200, "dependent": 5100 },
+      "specialRules": {
+        "alternativeMinimumTax": {
+          "rate": 0.03,
+          "threshold": 150000,
+          "calculation": "greater of income tax or 3% of federal AGI"
+        },
+        "additionalStandardDeduction": 1200
+      }
+    },
+    "VA": {
+      "name": "Virginia",
+      "hasIncomeTax": true,
+      "taxType": "progressive",
+      "brackets": {
+        "single": [
+          { "min": 0, "max": 3000, "rate": 0.02 },
+          { "min": 3000, "max": 5000, "rate": 0.03 },
+          { "min": 5000, "max": 17000, "rate": 0.05 },
+          { "min": 17000, "max": null, "rate": 0.0575 }
+        ],
+        "married": [
+          { "min": 0, "max": 3000, "rate": 0.02 },
+          { "min": 3000, "max": 5000, "rate": 0.03 },
+          { "min": 5000, "max": 17000, "rate": 0.05 },
+          { "min": 17000, "max": null, "rate": 0.0575 }
+        ]
+      },
+      "standardDeduction": { "single": 8500, "married": 17000 },
+      "personalExemption": { "single": 930, "married": 1860, "dependent": 930 }
+    },
+    "WA": {
+      "name": "Washington",
+      "hasIncomeTax": true,
+      "taxType": "capital_gains_only",
+      "rate": 0.07,
+      "threshold": 270000,
+      "specialRules": {
+        "capitalGainsOnly": true,
+        "longTermCarePayroll": { "rate": 0.0058 },
+        "exemption": 270000
+      }
+    },
+    "WV": {
+      "name": "West Virginia",
+      "hasIncomeTax": true,
+      "taxType": "progressive",
+      "brackets": {
+        "single": [
+          { "min": 0, "max": 10000, "rate": 0.0222 },
+          { "min": 10000, "max": 25000, "rate": 0.0296 },
+          { "min": 25000, "max": 40000, "rate": 0.0333 },
+          { "min": 40000, "max": 60000, "rate": 0.0444 },
+          { "min": 60000, "max": null, "rate": 0.0482 }
+        ],
+        "married": [
+          { "min": 0, "max": 10000, "rate": 0.0222 },
+          { "min": 10000, "max": 25000, "rate": 0.0296 },
+          { "min": 25000, "max": 40000, "rate": 0.0333 },
+          { "min": 40000, "max": 60000, "rate": 0.0444 },
+          { "min": 60000, "max": null, "rate": 0.0482 }
+        ]
+      },
+      "standardDeduction": { "single": 0, "married": 0 },
+      "personalExemption": { "single": 2000, "married": 4000, "dependent": 2000 }
+    },
+    "WI": {
+      "name": "Wisconsin",
+      "hasIncomeTax": true,
+      "taxType": "progressive",
+      "brackets": {
+        "single": [
+          { "min": 0, "max": 14680, "rate": 0.035 },
+          { "min": 14680, "max": 29370, "rate": 0.044 },
+          { "min": 29370, "max": 323290, "rate": 0.053 },
+          { "min": 323290, "max": null, "rate": 0.0765 }
+        ],
+        "married": [
+          { "min": 0, "max": 19580, "rate": 0.035 },
+          { "min": 19580, "max": 39150, "rate": 0.044 },
+          { "min": 39150, "max": 431060, "rate": 0.053 },
+          { "min": 431060, "max": null, "rate": 0.0765 }
+        ]
+      },
+      "standardDeduction": { "single": 13560, "married": 25110 },
+      "personalExemption": { "single": 700, "married": 1400, "dependent": 700 },
+      "specialRules": {
+        "standardDeductionPhaseout": {
+          "single": { "start": 19549, "end": 132549 },
+          "married": { "start": 28209, "end": 155169 }
+        }
+      }
+    },
+    "WY": {
+      "name": "Wyoming",
+      "hasIncomeTax": false,
+      "taxType": "none"
+    },
+    "DC": {
+      "name": "District of Columbia",
+      "hasIncomeTax": true,
+      "taxType": "progressive",
+      "brackets": {
+        "single": [
+          { "min": 0, "max": 10000, "rate": 0.04 },
+          { "min": 10000, "max": 40000, "rate": 0.06 },
+          { "min": 40000, "max": 60000, "rate": 0.065 },
+          { "min": 60000, "max": 250000, "rate": 0.085 },
+          { "min": 250000, "max": 500000, "rate": 0.0925 },
+          { "min": 500000, "max": 1000000, "rate": 0.0975 },
+          { "min": 1000000, "max": null, "rate": 0.1075 }
+        ],
+        "married": [
+          { "min": 0, "max": 10000, "rate": 0.04 },
+          { "min": 10000, "max": 40000, "rate": 0.06 },
+          { "min": 40000, "max": 60000, "rate": 0.065 },
+          { "min": 60000, "max": 250000, "rate": 0.085 },
+          { "min": 250000, "max": 500000, "rate": 0.0925 },
+          { "min": 500000, "max": 1000000, "rate": 0.0975 },
+          { "min": 1000000, "max": null, "rate": 0.1075 }
+        ]
+      },
+      "standardDeduction": { "single": 15000, "married": 30000 },
+      "personalExemption": { "single": 0, "married": 0, "dependent": 0 },
+      "specialRules": {
+        "includesFeder
