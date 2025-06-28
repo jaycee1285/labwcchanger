@@ -3,8 +3,19 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:xml/xml.dart';
 import 'package:path/path.dart' as path;
+import 'package:flutter/widgets.dart';
+import 'package:window_size/window_size.dart';
 
 void main() {
+    WidgetsFlutterBinding.ensureInitialized();
+  // Only desktop targets have resizable windows
+  if (Platform.isLinux || Platform.isMacOS || Platform.isWindows) {
+    const Size fixed = Size(480, 720);             // logical pixels
+    setWindowMinSize(fixed);                 // user can’t shrink past this
+    setWindowMaxSize(fixed);                 // …or stretch past this
+    setWindowFrame(Rect.fromLTWH(200, 100,   // initial position + size
+        fixed.width, fixed.height));
+  }
   runApp(const LabWCThemeApp());
 }
 
@@ -799,7 +810,7 @@ class _ThemeManagerState extends State<ThemeManager> {
         child: SizedBox(
           width: 320,
           child: Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding: const EdgeInsets.all(0),
             child: Column(
               children: [
                 if (availableThemeStyles.isNotEmpty) ...[
