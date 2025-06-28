@@ -10,14 +10,15 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
+        raw  = pkgs.flutter.buildFlutterApplication rec {
+          pname       = "lchanger";
+          version     = "0.1.0";
+          src         = ./.;
+          pubspecLock = ./pubspec.lock;
+        };
+        app = pkgs.lib.removeAttrs raw [ "etc" ];
       in {
-        packages.default =
-          (pkgs.flutter.buildFlutterApplication rec {
-            pname       = "lchanger";
-            version     = "0.1.0";
-            src         = ./.;
-            pubspecLock = ./pubspec.lock;
-          }).overrideAttrs (_: { etc = { }; });
+        packages.default = app;
 
         devShell = pkgs.mkShell {
           buildInputs = [ pkgs.flutter pkgs.dart ];
