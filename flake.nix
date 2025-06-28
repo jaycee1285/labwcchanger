@@ -14,7 +14,7 @@
       {
         # use `rec` so we can refer to `src` further down
         packages.default = pkgs.flutter.buildFlutterApplication (rec {
-          pname   = "labwc-theme-changer";
+          pname   = "lchanger";
           version = "0.1.0";
 
           # the path to the repo itself
