@@ -13,13 +13,11 @@
       in {
         packages.default =
           (pkgs.flutter.buildFlutterApplication rec {
-            pname        = "lchanger";
-            version      = "0.1.0";
-            src          = ./.;
-            pubspecLock  = ./pubspec.lock;
-          }) // {
-            etc = { };
-          };
+            pname       = "lchanger";
+            version     = "0.1.0";
+            src         = ./.;
+            pubspecLock = ./pubspec.lock;
+          }).overrideAttrs (_: { etc = { }; });
 
         devShell = pkgs.mkShell {
           buildInputs = [ pkgs.flutter pkgs.dart ];
