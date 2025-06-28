@@ -21,6 +21,10 @@
           # 👉  Use a *path literal*, not a string:
           pubspecLock = ./pubspec.lock;
         };
+        {
+    # Make /etc contribution empty so the merge code is happy
+    etc = { };
+  };
 
         devShell = pkgs.mkShell { buildInputs = [ pkgs.flutter pkgs.dart ]; };
       });
