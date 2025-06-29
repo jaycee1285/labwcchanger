@@ -11,29 +11,19 @@
       let
         pkgs = import nixpkgs { inherit system; };
         
-        flutterApp = pkgs.flutter.buildFlutterApplication {
+        app = pkgs.flutter.buildFlutterApplication {
           pname       = "lchanger";
           version     = "0.1.0";
           src         = ./.;
           pubspecLock = ./pubspec.lock;
         };
         
-        # Create a clean derivation that only includes the output
-        app = pkgs.stdenv.mkDerivation {
-          pname = "lchanger";
-          version = "0.1.0";
-          
-          # Don't need a src since we're copying from flutterApp
-          dontUnpack = true;
-          
-          installPhase = ''
-            mkdir -p $out
-            cp -r ${flutterApp}/* $out/
-          '';
-        };
-        
       in {
-        packages.default = app;
+        # Use passthru to ensure we're only exposing the derivation itself
+        packages.default = app // { 
+          # Override any problematic attributes
+          inherit (app) name version pname outPath drvPath;
+        };
 
         devShell = pkgs.mkShell {
           buildInputs = [ pkgs.flutter pkgs.dart ];
