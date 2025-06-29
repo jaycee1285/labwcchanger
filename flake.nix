@@ -11,19 +11,38 @@
       let
         pkgs = import nixpkgs { inherit system; };
         
-        app = pkgs.flutter.buildFlutterApplication {
+        flutterApp = pkgs.flutter.buildFlutterApplication {
           pname       = "lchanger";
           version     = "0.1.0";
           src         = ./.;
           pubspecLock = ./pubspec.lock;
         };
         
+        # Use runCommand to create a clean package
+        app = pkgs.runCommand "lchanger" {
+          version = "0.1.0";
+        } ''
+          mkdir -p $out/bin $out/share
+          
+          # Copy binaries
+          if [ -d ${flutterApp}/bin ]; then
+            cp -r ${flutterApp}/bin/* $out/bin/
+          fi
+          
+          # Copy any other needed files
+          if [ -d ${flutterApp}/share ]; then
+            cp -r ${flutterApp}/share/* $out/share/
+          fi
+          
+          # Copy lib if it exists (for shared libraries)
+          if [ -d ${flutterApp}/lib ]; then
+            mkdir -p $out/lib
+            cp -r ${flutterApp}/lib/* $out/lib/
+          fi
+        '';
+        
       in {
-        # Use passthru to ensure we're only exposing the derivation itself
-        packages.default = app // { 
-          # Override any problematic attributes
-          inherit (app) name version pname outPath drvPath;
-        };
+        packages.default = app;
 
         devShell = pkgs.mkShell {
           buildInputs = [ pkgs.flutter pkgs.dart ];
