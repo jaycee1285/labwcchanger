@@ -22,7 +22,10 @@
             # put lib.fakeSha256 while iterating; replace with real hash once Nix prints it
             sha256 = "sha256-VoYIgTq+wYBFx73mFSF9x9R24K0uYbcWgcP+VfGgWPw=";
           };
-
+              postFetch = ''
+    # delete whatever RPATH the upstream build contains
+    patchelf --remove-rpath $out
+  '';
           ## 2 – no unpack step, so skip to install
           phases = [ "installPhase" ];
           dontUnpack = true;
