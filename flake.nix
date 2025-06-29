@@ -11,29 +11,48 @@
       let
         pkgs = import nixpkgs { inherit system; };
         
-        # Remove dev dependencies from pubspec for the build
-        buildPubspec = pkgs.writeText "pubspec.yaml" ''
-          name: labwcchanger
-          description: "A theme manager for LabWC"
-          publish_to: 'none'
-          version: 0.1.0
-          environment:
-            sdk: ^3.8.0
-          dependencies:
-            flutter:
-              sdk: flutter
-            xml: ^6.3.0
-            window_size: ^0.1.0
-            path: ^1.8.3
-          flutter:
-            uses-material-design: true
-        '';
+        # Step 1: Create a fixed-output derivation for dependencies
+        pubspecLock = ./pubspec.lock;
         
+        depsSource = pkgs.stdenv.mkDerivation {
+          name = "labwcchanger-deps-source";
+          src = pkgs.lib.cleanSource ./.;
+          
+          nativeBuildInputs = [ pkgs.flutter pkgs.cacert pkgs.git ];
+          
+          # Fixed-output derivation - has network access
+          outputHashMode = "recursive";
+          outputHashAlgo = "sha256";
+          # Start with a fake hash - the build will fail and tell you the real one
+          outputHash = "sha256-0000000000000000000000000000000000000000000=";
+          
+          SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+          GIT_SSL_CAINFO = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+          
+          buildPhase = ''
+            export HOME=$TMPDIR
+            export PUB_CACHE=$TMPDIR/.pub-cache
+            
+            mkdir -p $out
+            cp -r . $out/
+            cd $out
+            
+            flutter config --no-analytics
+            flutter pub get
+            
+            # Copy the pub-cache to the output
+            cp -r $PUB_CACHE $out/.pub-cache
+          '';
+          
+          dontInstall = true;
+        };
+        
+        # Step 2: Build the app using the deps from step 1
         app = pkgs.stdenv.mkDerivation {
           pname = "labwcchanger";
           version = "0.1.0";
           
-          src = pkgs.lib.cleanSource ./.;
+          src = depsSource;
           
           nativeBuildInputs = with pkgs; [
             flutter
@@ -56,45 +75,23 @@
             libepoxy
           ];
           
-          # Override pubspec to remove dev dependencies
-          preConfigure = ''
-            cp ${buildPubspec} pubspec.yaml
-          '';
-          
           buildPhase = ''
-            runHook preBuild
+            export HOME=$TMPDIR
+            export PUB_CACHE=$(pwd)/.pub-cache
             
-            export HOME=$(mktemp -d)
-            export PUB_CACHE="$HOME/.pub-cache"
-            export FLUTTER_ROOT="${pkgs.flutter}"
-            
-            # Configure flutter
             flutter config --no-analytics
             flutter config --enable-linux-desktop
-            
-            # Get dependencies
-            flutter pub get
-            
-            # Build the app
-            flutter build linux --release
-            
-            runHook postBuild
+            flutter build linux --release --offline
           '';
           
           installPhase = ''
-            runHook preInstall
-            
-            mkdir -p $out
+            mkdir -p $out/bin
             cp -r build/linux/x64/release/bundle/* $out/
             
-            # Ensure binary is executable and in the right place
             if [ -f $out/labwcchanger ]; then
               chmod +x $out/labwcchanger
-              mkdir -p $out/bin
               mv $out/labwcchanger $out/bin/
             fi
-            
-            runHook postInstall
           '';
         };
         
@@ -102,12 +99,7 @@
         packages.default = app;
 
         devShell = pkgs.mkShell {
-          buildInputs = with pkgs; [ 
-            flutter 
-            dart 
-            pkg-config
-            gtk3
-          ];
+          buildInputs = with pkgs; [ flutter dart ];
         };
       });
 }
