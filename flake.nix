@@ -1,4 +1,3 @@
-# flake.nix
 {
   description = "LabWC theme changer (Flutter)";
 
@@ -11,50 +10,55 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
+        lib  = pkgs.lib;
 
+        # ── 1. download + scrub the upstream binary ──────────────────────────────
+        binary = (pkgs.fetchurl {
+          url    = "https://github.com/jaycee1285/labwcchanger/releases/download/relase/labwcchanger";
+          sha256 = "sha256-VoYIgTq+wYBFx73mFSF9x9R24K0uYbcWgcP+VfGgWPw=";
+
+          # runs *before* the hash is computed
+          postFetch = ''
+            # strip RPATHs that point into some other /nix/store
+            patchelf --remove-rpath $out
+          '';
+        }).overrideAttrs (_: {
+          # upstream build still contains a store-path interpreter;
+          # we’ll patch it later, so waive the fixed-output check now
+          unsafeDiscardReferences = true;
+        });
+
+        # ── 2. wrap it in a normal derivation so autoPatchelfHook can fix it ──
         app = pkgs.stdenv.mkDerivation {
-          pname    = "labwcchanger";
-          version  = "0.1";
+          pname   = "labwcchanger";
+          version = "0.1";
 
-          ## 1 – point directly at the release asset
-          src = pkgs.fetchurl {
-            url    = "https://github.com/jaycee1285/labwcchanger/releases/download/relase/labwcchanger";
-            # put lib.fakeSha256 while iterating; replace with real hash once Nix prints it
-            sha256 = "sha256-VoYIgTq+wYBFx73mFSF9x9R24K0uYbcWgcP+VfGgWPw=";
-          };
-              postFetch = ''
-    # delete whatever RPATH the upstream build contains
-    patchelf --remove-rpath $out
-  '';
-          ## 2 – no unpack step, so skip to install
-          phases = [ "installPhase" ];
+          src = binary;
+
           dontUnpack = true;
+          phases     = [ "installPhase" ];
 
-          ## 3 – let autoPatchelfHook patch ELF RPATHs
           nativeBuildInputs = [ pkgs.autoPatchelfHook ];
 
-          ## 4 – runtime libraries Flutter-on-Linux typically needs
           buildInputs = with pkgs; [
             gtk3 libxkbcommon
             xorg.libX11 xorg.libXext xorg.libXi xorg.libXrender xorg.libXtst
-            libGL       # OpenGL
+            libGL             # OpenGL
             glib pango cairo gdk-pixbuf atk
             wayland libepoxy
           ];
 
           installPhase = ''
-            runHook preInstall
-            install -D $src $out/bin/labwcchanger
-            chmod +x $out/bin/labwcchanger
-            runHook postInstall
+            install -Dm755 $src $out/bin/labwcchanger
           '';
         };
-      in {
+      in
+      {
         packages.default = app;
 
-        ## (optional) dev shell for hacking on Flutter code
+        # optional shell for hacking on Flutter sources
         devShell = pkgs.mkShell {
-          buildInputs = with pkgs; [ flutter dart ];
+          buildInputs = [ pkgs.flutter pkgs.dart ];
         };
       });
 }
