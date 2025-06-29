@@ -10,13 +10,28 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
-        raw  = pkgs.flutter.buildFlutterApplication rec {
+        
+        flutterApp = pkgs.flutter.buildFlutterApplication {
           pname       = "lchanger";
           version     = "0.1.0";
           src         = ./.;
           pubspecLock = ./pubspec.lock;
         };
-        app = pkgs.lib.removeAttrs raw [ "etc" ];
+        
+        # Create a clean derivation that only includes the output
+        app = pkgs.stdenv.mkDerivation {
+          pname = "lchanger";
+          version = "0.1.0";
+          
+          # Don't need a src since we're copying from flutterApp
+          dontUnpack = true;
+          
+          installPhase = ''
+            mkdir -p $out
+            cp -r ${flutterApp}/* $out/
+          '';
+        };
+        
       in {
         packages.default = app;
 
