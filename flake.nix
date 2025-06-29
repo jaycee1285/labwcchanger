@@ -11,35 +11,33 @@
       let
         pkgs = import nixpkgs { inherit system; };
         
-        flutterApp = pkgs.flutter.buildFlutterApplication {
-          pname       = "lchanger";
+        flutterDrv = pkgs.flutter.buildFlutterApplication {
+          pname       = "labwcchanger";
           version     = "0.1.0";
           src         = ./.;
           pubspecLock = ./pubspec.lock;
         };
         
-        # Use runCommand to create a clean package
-        app = pkgs.runCommand "lchanger" {
+        # Let's see what attributes this derivation has
+        debugInfo = builtins.trace "Flutter drv attrs: ${toString (builtins.attrNames flutterDrv)}" flutterDrv;
+        
+        # Create a clean wrapper
+        app = pkgs.stdenv.mkDerivation {
+          pname = "labwcchanger";
           version = "0.1.0";
-        } ''
-          mkdir -p $out/bin $out/share
           
-          # Copy binaries
-          if [ -d ${flutterApp}/bin ]; then
-            cp -r ${flutterApp}/bin/* $out/bin/
-          fi
+          src = flutterDrv;
           
-          # Copy any other needed files
-          if [ -d ${flutterApp}/share ]; then
-            cp -r ${flutterApp}/share/* $out/share/
-          fi
+          dontBuild = true;
+          dontUnpack = true;
           
-          # Copy lib if it exists (for shared libraries)
-          if [ -d ${flutterApp}/lib ]; then
-            mkdir -p $out/lib
-            cp -r ${flutterApp}/lib/* $out/lib/
-          fi
-        '';
+          installPhase = ''
+            mkdir -p $out
+            cp -r $src/* $out/
+            # Remove any .nix files that might have been copied
+            find $out -name "*.nix" -delete 2>/dev/null || true
+          '';
+        };
         
       in {
         packages.default = app;
