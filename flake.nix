@@ -11,31 +11,90 @@
       let
         pkgs = import nixpkgs { inherit system; };
         
-        flutterDrv = pkgs.flutter.buildFlutterApplication {
-          pname       = "labwcchanger";
-          version     = "0.1.0";
-          src         = ./.;
-          pubspecLock = ./pubspec.lock;
-        };
+        # Remove dev dependencies from pubspec for the build
+        buildPubspec = pkgs.writeText "pubspec.yaml" ''
+          name: labwcchanger
+          description: "A theme manager for LabWC"
+          publish_to: 'none'
+          version: 0.1.0
+          environment:
+            sdk: ^3.8.0
+          dependencies:
+            flutter:
+              sdk: flutter
+            xml: ^6.3.0
+            window_size: ^0.1.0
+            path: ^1.8.3
+          flutter:
+            uses-material-design: true
+        '';
         
-        # Let's see what attributes this derivation has
-        debugInfo = builtins.trace "Flutter drv attrs: ${toString (builtins.attrNames flutterDrv)}" flutterDrv;
-        
-        # Create a clean wrapper
         app = pkgs.stdenv.mkDerivation {
           pname = "labwcchanger";
           version = "0.1.0";
           
-          src = flutterDrv;
+          src = pkgs.lib.cleanSource ./.;
           
-          dontBuild = true;
-          dontUnpack = true;
+          nativeBuildInputs = with pkgs; [
+            flutter
+            pkg-config
+            gtk3
+            pcre2
+            util-linux
+            libselinux
+            libsepol
+            libthai
+            libdatrie
+            libxkbcommon
+            dbus
+            xorg.libX11
+            at-spi2-core
+            libsecret
+            jsoncpp
+            xorg.libXdmcp
+            xorg.libXtst
+            libepoxy
+          ];
+          
+          # Override pubspec to remove dev dependencies
+          preConfigure = ''
+            cp ${buildPubspec} pubspec.yaml
+          '';
+          
+          buildPhase = ''
+            runHook preBuild
+            
+            export HOME=$(mktemp -d)
+            export PUB_CACHE="$HOME/.pub-cache"
+            export FLUTTER_ROOT="${pkgs.flutter}"
+            
+            # Configure flutter
+            flutter config --no-analytics
+            flutter config --enable-linux-desktop
+            
+            # Get dependencies
+            flutter pub get
+            
+            # Build the app
+            flutter build linux --release
+            
+            runHook postBuild
+          '';
           
           installPhase = ''
+            runHook preInstall
+            
             mkdir -p $out
-            cp -r $src/* $out/
-            # Remove any .nix files that might have been copied
-            find $out -name "*.nix" -delete 2>/dev/null || true
+            cp -r build/linux/x64/release/bundle/* $out/
+            
+            # Ensure binary is executable and in the right place
+            if [ -f $out/labwcchanger ]; then
+              chmod +x $out/labwcchanger
+              mkdir -p $out/bin
+              mv $out/labwcchanger $out/bin/
+            fi
+            
+            runHook postInstall
           '';
         };
         
@@ -43,7 +102,12 @@
         packages.default = app;
 
         devShell = pkgs.mkShell {
-          buildInputs = [ pkgs.flutter pkgs.dart ];
+          buildInputs = with pkgs; [ 
+            flutter 
+            dart 
+            pkg-config
+            gtk3
+          ];
         };
       });
 }
