@@ -11,7 +11,7 @@
         lib  = pkgs.lib;
         bundle = builtins.fetchTarball {
           url    = "https://github.com/jaycee1285/labwcchanger/releases/download/release/labwcchanger1.0.tar.gz";
-          sha256 = "sha256:125b6snri611j31qlp4hqr9056gd14g2z70hi09q4pkkq4gj5754";
+          sha256 = "sha256:1233749a8eda530e18fcf2a8506aeb70bb55c708b0899b77ce705e91013f5acd";
         };
         runtimeLibs = with pkgs; [
           gtk3 libxkbcommon
