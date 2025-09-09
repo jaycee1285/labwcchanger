@@ -206,11 +206,13 @@ class _ThemeManagerState extends State<ThemeManager> {
   List<String> openboxThemes = [];
   List<String> gtkThemes = [];
   List<String> iconThemes = [];
+List<String> kittyThemes = [];
   List<String> wallpapers = [];
   
   String? selectedOpenboxTheme;
   String? selectedGtkTheme;
   String? selectedIconTheme;
+String? selectedKittyTheme;
   String? selectedWallpaper;
   
   bool useThemeStyle = false;
@@ -269,10 +271,39 @@ class _ThemeManagerState extends State<ThemeManager> {
       openboxThemes = findOpenboxThemes();
       gtkThemes = findGtkThemes();
       iconThemes = findIconThemes();
+      kittyThemes = findKittyThemes();
       wallpapers = findWallpapers();
       availableThemeStyles = findThemeStyles();
     });
   }
+List<String> findKittyThemes() {
+  // Pull theme names from ~/.config/kitty/kitty-themes
+  final themes = <String>{};
+  final home = Platform.environment['HOME'] ?? '/home/john';
+  final dirPath = '$home/.config/kitty/kitty-themes';
+  final dir = Directory(dirPath);
+  if (dir.existsSync()) {
+    try {
+      for (final entry in dir.listSync()) {
+        if (entry is File) {
+          // Use file basename without extension as theme name
+          final base = path.basenameWithoutExtension(entry.path);
+          if (base.trim().isNotEmpty) themes.add(base);
+        } else if (entry is Directory) {
+          // Some themes may be directories; use dir name
+          final name = path.basename(entry.path);
+          if (name.trim().isNotEmpty) themes.add(name);
+        }
+      }
+    } catch (e) {
+      print('Error scanning kitty themes: $e');
+    }
+  }
+  final list = themes.toList()..sort();
+  return list;
+}
+
+
   
   List<String> findOpenboxThemes() {
     final themes = <String>{'GTK'};
@@ -918,6 +949,27 @@ class _ThemeManagerState extends State<ThemeManager> {
                           },
                         ),
                         const SizedBox(height: 8),
+const SizedBox(height: 8),
+
+ThemeDropdown(
+  label: 'Kitty Theme',
+  value: selectedKittyTheme,
+  items: kittyThemes,
+  onChanged: (value) async {
+    setState(() {
+      selectedKittyTheme = value;
+    });
+    if (value != null) {
+      try {
+        // Run: kitten themes --reload-in=all [theme]
+        await Process.run('bash', ['-lc', 'kitten themes --reload-in=all "${value}"']);
+      } catch (e) {
+        print('Error applying kitty theme: $e');
+      }
+    }
+  },
+),
+
                         
                         ThemeDropdown(
                           label: 'Wallpaper',
