@@ -115,6 +115,6 @@
             export LD_LIBRARY_PATH="${pkgs.libGL}/lib:${pkgs.mesa}/lib:$LD_LIBRARY_PATH"
           '';
         };
-      };
+      }
     );
 }
