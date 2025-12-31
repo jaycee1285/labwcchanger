@@ -15,9 +15,9 @@
         lib = pkgs.lib;
 
         bundle = builtins.fetchTarball {
-          url = "https://github.com/jaycee1285/labwcchanger/releases/download/release/labwcchanger-1.1.tar.gz";
+          url = "https://github.com/jaycee1285/labwcchanger/releases/download/12/labwcchanger-1.2.tar.gz";
           # keep your current hash format for now; swap to SRI (sha256-...) after prefetch if needed
-          sha256 = "sha256:0aaz024a3qhsn8g2zdyn7v48y86jnj5n19rxqwn2v2igiydivmiy";
+          sha256 = "sha256:bb4ca03dece6dd49a4b9f1870b758cf6a52a54dcc205c04aa711d173dd333f41";
         };
 
         runtimeLibs = with pkgs; [
